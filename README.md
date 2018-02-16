@@ -1,3 +1,3 @@
-# surirobot-client
+# Surirobot [WIP]
 
-Dockerfile for easy deploiement of client & modules
+Dockerfiles set for an easy deploiement of client & modules.

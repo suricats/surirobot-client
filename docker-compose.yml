@@ -1,0 +1,15 @@
+version: 3
+services:
+  surirobot-client:
+    image: surirobot/client:1.0
+    build: ./Dockerfiles/client-qt
+  surirobot-redis:
+    image: redis:alpine
+  surirobot-module-facerecognition:
+    image: surirobot/facerecognition:1.0
+    build: ./Dockerfiles/facerecognition
+    devices:
+      - "/dev/video0:/dev/video0"
+#  surirobot-module-emotionalrecognition:
+#    image: surirobot/emotionalrecognition:1.0
+#    build: ./Dockerfiles/emotionalrecognition
