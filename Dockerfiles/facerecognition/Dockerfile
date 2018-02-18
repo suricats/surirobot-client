@@ -1,4 +1,5 @@
 FROM python:3.6-slim
+LABEL maintainer="tberdy@hotmail.fr"
 
 RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
@@ -41,8 +42,7 @@ RUN cd ~ && \
 
 COPY ./../../src/surirobot-module-facerecognition /root/surirobot-module-facerecognition
 RUN cd /root/surirobot-module-facerecognition && \
-    pip3 install -r requirements.txt && \
-    python3 setup.py install
+    pip3 install -r requirements.txt
 
 CMD cd /root/surirobot-module-facerecognition && \
     python3 start.py

@@ -1,10 +1,12 @@
 version: 3
 services:
-  surirobot-client:
-    image: surirobot/client:1.0
-    build: ./Dockerfiles/client-qt
+#  surirobot-client:
+#    image: surirobot/client:1.0
+#    build: ./Dockerfiles/client-qt
   surirobot-redis:
     image: redis:alpine
+    ports:
+     - "7379:6379"
   surirobot-module-facerecognition:
     image: surirobot/facerecognition:1.0
     build: ./Dockerfiles/facerecognition
