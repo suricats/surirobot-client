@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM python:3.4-slim
 LABEL maintainer="Thomas BERDY <tberdy@hotmail.fr>"
 
 RUN apt-get -y update
