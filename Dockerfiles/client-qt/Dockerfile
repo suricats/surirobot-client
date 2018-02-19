@@ -11,6 +11,7 @@ RUN apt-get install -y --fix-missing \
     pkg-config \
     software-properties-common \
     libhiredis-dev \
+    qt5-default \
     && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 RUN cd ~ && \
