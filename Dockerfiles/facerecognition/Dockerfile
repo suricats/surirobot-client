@@ -1,5 +1,5 @@
 FROM python:3.6-slim
-LABEL maintainer="tberdy@hotmail.fr"
+LABEL maintainer="Thomas BERDY <tberdy@hotmail.fr>"
 
 RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
@@ -31,18 +31,15 @@ RUN cd ~ && \
     cd  dlib/ && \
     python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
+RUN cd ~ && \
+    mkdir -p facerecognition && \
+    git clone https://github.com/suricats/surirobot-python-face-recognition.git facerecognition/ && \
+    cd  facerecognition/ && \
+    pip3 install -r requirements.txt
 
-# The rest of this file just runs an example script.
-
-# If you wanted to use this Dockerfile to run your own app instead, maybe you would do this:
-# COPY . /root/your_app_or_whatever
-# RUN cd /root/your_app_or_whatever && \
-#     pip3 install -r requirements.txt
-# RUN whatever_command_you_run_to_start_your_app
-
-COPY ./../../src/surirobot-module-facerecognition /root/surirobot-module-facerecognition
 RUN cd /root/surirobot-module-facerecognition && \
     pip3 install -r requirements.txt
 
-CMD cd /root/surirobot-module-facerecognition && \
+COPY ./people /root/facerecognition/people
+CMD cd /root/facerecognition && \
     python3 start.py
