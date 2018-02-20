@@ -18,8 +18,7 @@ RUN cd ~ && \
     mkdir -p client && \
     git clone https://github.com/suricats/surirobot-client-qt.git client/ && \
     cd  client/ && \
-    qmake && \
-    make
+    QMAKE=qmake make CONF=linux-debug build
 
 CMD cd /root/client-qt && \
-    ./build/client
+    ./dist/linux-debug/GNU-Linux/surirobot-client-qt

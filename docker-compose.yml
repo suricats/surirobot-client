@@ -2,16 +2,13 @@ version: 3
 services:
   surirobot-redis:
     image: redis:alpine
-    ports:
-     - "7379:6379"
   surirobot-module-facerecognition:
     image: surirobot/facerecognition:1.0
     build: ./Dockerfiles/facerecognition
     devices:
       - "/dev/video0:/dev/video0"
-  #  surirobot-client:
-  #    image: surirobot/client:1.0
-  #    build: ./Dockerfiles/client-qt
-  #  surirobot-module-emotionalrecognition:
-  #    image: surirobot/emotionalrecognition:1.0
-  #    build: ./Dockerfiles/emotionalrecognition
+  surirobot-client:
+    image: surirobot/client:1.0
+    build: ./Dockerfiles/client-qt
+    devices:
+      - "/dev/video0:/dev/video0"

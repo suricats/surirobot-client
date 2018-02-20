@@ -1,4 +1,4 @@
-FROM python:3.4-slim
+FROM python:3.6-slim
 LABEL maintainer="Thomas BERDY <tberdy@hotmail.fr>"
 
 RUN apt-get -y update
@@ -35,9 +35,6 @@ RUN cd ~ && \
     mkdir -p facerecognition && \
     git clone https://github.com/suricats/surirobot-python-face-recognition.git facerecognition/ && \
     cd  facerecognition/ && \
-    pip3 install -r requirements.txt
-
-RUN cd /root/surirobot-module-facerecognition && \
     pip3 install -r requirements.txt
 
 COPY ./people /root/facerecognition/people
