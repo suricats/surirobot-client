@@ -20,5 +20,5 @@ RUN cd ~ && \
     cd  client/ && \
     QMAKE=qmake make CONF=linux-debug build
 
-CMD cd /root/client-qt && \
+CMD cd /root/client && \
     ./dist/linux-debug/GNU-Linux/surirobot-client-qt

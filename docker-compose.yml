@@ -3,12 +3,22 @@ services:
   surirobot-redis:
     image: redis:alpine
   surirobot-module-facerecognition:
-    image: surirobot/facerecognition:1.0
-    build: ./Dockerfiles/facerecognition
+    image: surirobot/face-recognition
     devices:
       - "/dev/video0:/dev/video0"
+    volumes:
+      - ./data/people:/root/facerecognition/people:ro
+    environment:
+      - DISPLAY=unix$DISPLAY
+      - SURIROBOT_REDIS_ADDRESS=surirobot-redis
+      - FACERECO_REDIS_MODULE_NAME=face-recognition
+      - FACERECO_IMG_NAME=face-640.jpg
+      - FACERECO_TOLERANCE=0.54
   surirobot-client:
-    image: surirobot/client:1.0
-    build: ./Dockerfiles/client-qt
+    image: surirobot/client-qt
     devices:
       - "/dev/video0:/dev/video0"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - SURIROBOT_REDIS_ADDRESS=surirobot-redis
