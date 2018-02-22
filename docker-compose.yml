@@ -1,4 +1,4 @@
-version: 3
+version: '2'
 services:
   surirobot-redis:
     image: redis:alpine
@@ -9,7 +9,6 @@ services:
     volumes:
       - ./data/people:/root/facerecognition/people:ro
     environment:
-      - DISPLAY=unix$DISPLAY
       - SURIROBOT_REDIS_ADDRESS=surirobot-redis
       - FACERECO_REDIS_MODULE_NAME=face-recognition
       - FACERECO_IMG_NAME=face-640.jpg
@@ -21,4 +20,5 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
+      - DISPLAY=unix:0
       - SURIROBOT_REDIS_ADDRESS=surirobot-redis
