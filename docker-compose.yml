@@ -39,6 +39,7 @@ services:
     devices:
       - "/dev/dri:/dev/dri"
       - "/dev/video0:/dev/video0"
+      - "/dev/snd:/dev/snd"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./data/pictures:/root/facerecognition/pictures:rw
