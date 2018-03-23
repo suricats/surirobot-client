@@ -4,15 +4,6 @@ services:
     image: redis:alpine
     restart: always
 
-  surirobot-mariadb:
-    image: mariadb
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: suricats
-      MYSQL_USER: surirobot
-      MYSQL_PASSWD: alpine
-      MYSQL_DATABASE: surirobot
-
   surirobot-module-facerecognition:
     image: surirobot/face-recognition
     ports:
@@ -20,7 +11,7 @@ services:
     devices:
       - "/dev/video0:/dev/video0"
     volumes:
-      - ./data/pictures:/root/facerecognition/pictures:rw
+      - ./data:/root/facerecognition/data:rw
     environment:
       - SURIROBOT_REDIS_ADDRESS=surirobot-redis
       - MYSQL_ROOT_PASSWORD=suricats
@@ -29,10 +20,7 @@ services:
       - FACERECO_IMG_NAME=face-640.jpg
       - FACERECO_TOLERANCE=0.54
 
-      - SURIROBOT_DB_ADDRESS=surirobot-mariadb
-      - SURIROBOT_DB_LOGIN=surirobot
-      - SURIROBOT_DB_PASSWD=alpine
-      - SURIROBOT_DB_NAME=surirobot
+      - SURIROBOT_DB=sqlite:///../data/surirobot.db
 
   surirobot-client:
     image: surirobot/client-qt
@@ -42,7 +30,7 @@ services:
       - "/dev/snd:/dev/snd"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ./data/pictures:/root/facerecognition/pictures:rw
+      - ./data:/root/facerecognition/data:rw
     environment:
       - DISPLAY=unix:0
       - SURIROBOT_REDIS_ADDRESS=surirobot-redis
